@@ -66,6 +66,10 @@ class NavbarEntry extends React.Component {
     this.setState({ active: nextProps.active });
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.active !== this.state.active;
+  }
+
   handleClick() {
     this.props.onClick();
   }
@@ -75,7 +79,7 @@ class NavbarEntry extends React.Component {
     const { active } = this.state;
 
     return (
-      <div
+      <li
         style={[
           styles.entry,
           active && styles.entryActive,
@@ -86,7 +90,7 @@ class NavbarEntry extends React.Component {
         <NavbarLink path={path} clicked={active} onClick={this.handleClick}>
           {name}
         </NavbarLink>
-      </div>
+      </li>
     );
   }
 }

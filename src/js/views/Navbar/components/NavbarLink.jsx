@@ -45,13 +45,11 @@ class NavbarLink extends React.Component {
 
   render() {
     const { clicked, children } = this.props;
-    const disabled = { disabled: clicked };
 
     return (
       <button
         style={[styles.button, clicked && styles.buttonDisabled]}
         onClick={this.handleClick}
-        {...disabled}
       >
         {children}
       </button>

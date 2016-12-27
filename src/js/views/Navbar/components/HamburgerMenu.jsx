@@ -50,6 +50,10 @@ class HamburgerMenu extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  shouldComponentUpdate(nextProps) {
+    return nextProps.open !== this.props.open;
+  }
+
   handleClick() {
     this.props.onClick();
   }
