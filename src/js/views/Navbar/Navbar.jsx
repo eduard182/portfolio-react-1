@@ -33,29 +33,23 @@ class Navbar extends React.Component {
     }, 300);
   }
 
-  render() {
-    const { open } = this.state;
-    const { path } = this.props;
+  renderEntries() {
+    const { path, entries } = this.props;
+    return this.state.open && entries.map((e, index) => {
+      const entry = Object.assign({}, e, {
+        active: (e.path === path),
+        onClick: this.handleClickEntry,
+        index,
+      });
+      return <NavbarEntry key={index} {...entry} />;
+    });
+  }
 
+  render() {
     return (
       <nav>
-        {open && this.props.entries.map((entry, index) => {
-          let e = entry;
-          if (e.path === path) {
-            e = Object.assign({}, e, {
-              active: true,
-            });
-          }
-          return (
-            <NavbarEntry
-              key={index}
-              index={index}
-              onClick={this.handleClickEntry}
-              {...e}
-            />
-          );
-        })}
-        <HamburgerMenu open={open} onClick={this.handleClickHamburger} />
+        {this.renderEntries()}
+        <HamburgerMenu open={this.state.open} onClick={this.handleClickHamburger} />
       </nav>
     );
   }

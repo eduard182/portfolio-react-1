@@ -20,32 +20,27 @@ const styles = {
       outline: 0,
     },
   },
-  spinner: {
+  line: {
     transition: '0.3s',
     position: 'absolute',
     opacity: 1,
-    width: 50,
-    height: 4,
+    width: 40,
+    height: 3,
+    borderRadius: 2,
     top: 0,
     backgroundColor: 'white',
   },
-  spinnerChild2: {
-    top: 15,
-  },
-  spinnerChild3: {
-    top: 30,
-  },
-  spinnerDiagonal1: {
+  lineChild2: { top: 10 },
+  lineChild3: { top: 20 },
+  lineDiagonal1: {
     transform: 'rotate(135deg)',
-    marginTop: 15,
+    marginTop: 10,
   },
-  spinnerDiagonal2: {
+  lineDiagonal2: {
     transform: 'rotate(-135deg)',
-    marginTop: -15,
+    marginTop: -10,
   },
-  spinerHorizontal: {
-    opacity: 0,
-  },
+  spinerHorizontal: { opacity: 0 },
 };
 
 class HamburgerMenu extends React.Component {
@@ -65,22 +60,22 @@ class HamburgerMenu extends React.Component {
       <button style={styles.hamburger} onClick={this.handleClick}>
         <div
           style={[
-            styles.spinner,
-            open && styles.spinnerDiagonal1,
+            styles.line,
+            open && styles.lineDiagonal1,
           ]}
         />
         <div
           style={[
-            styles.spinner,
-            styles.spinnerChild2,
+            styles.line,
+            styles.lineChild2,
             open && styles.spinerHorizontal,
           ]}
         />
         <div
           style={[
-            styles.spinner,
-            styles.spinnerChild3,
-            open && styles.spinnerDiagonal2,
+            styles.line,
+            styles.lineChild3,
+            open && styles.lineDiagonal2,
           ]}
         />
       </button>
