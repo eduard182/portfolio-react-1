@@ -27,7 +27,9 @@ gulp.task('set-prod-node-env', () => {
   process.env.NODE_ENV = 'production';
 });
 
-gulp.task('release-build', ['set-prod-node-env', 'build']);
+gulp.task('release-build', ['set-prod-node-env', 'build'], () => gulp.src('./.htaccess')
+  .pipe(gulp.dest('./dist'))
+);
 
 gulp.task('serve', ['build'], () => {
   browserSync.init({
