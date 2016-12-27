@@ -1,17 +1,20 @@
-import React from 'react';
-import Navbar from './Navbar';
+import React, { PropTypes } from 'react';
+import { Navbar } from './Navbar';
 
-function App({ children }) {
+function App({ children, location }) {
   return (
-    <div>
-      <Navbar />
+    <div style={{ backgroundColor: 'black', width: '100vw', height: '100vh' }}>
+      <Navbar path={location.pathname} />
       {children}
     </div>
   );
 }
 
 App.propTypes = {
-  children: React.PropTypes.node,
+  children: PropTypes.node,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }),
 };
 
 export default App;

@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { StyleRoot } from 'radium';
 import AppRouter from './AppRouter';
 
 ReactDOM.render(
-  <AppRouter />,
+  <StyleRoot>
+    <AppRouter />
+  </StyleRoot>,
   document.getElementById('app')
 );
