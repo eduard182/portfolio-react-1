@@ -1,4 +1,4 @@
-# React Boilerplate
+# Portfolio React
 
 ## Getting started
 
@@ -15,8 +15,7 @@ npm install
 
 * Once all the dependencies are installed, just run, from the root folder:
 ```
-./node_modules/.bin/gulp
+npm start
 ```
 
 Now you're good to go!
-
