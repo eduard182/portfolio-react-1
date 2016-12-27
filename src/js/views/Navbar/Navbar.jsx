@@ -38,7 +38,7 @@ class Navbar extends React.Component {
     const { path } = this.props;
 
     return (
-      <div>
+      <nav>
         {open && this.props.entries.map((entry, index) => {
           let e = entry;
           if (e.path === path) {
@@ -56,7 +56,7 @@ class Navbar extends React.Component {
           );
         })}
         <HamburgerMenu open={open} onClick={this.handleClickHamburger} />
-      </div>
+      </nav>
     );
   }
 }
