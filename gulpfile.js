@@ -5,6 +5,7 @@ const webpack = require('gulp-webpack');
 const browserSync = require('browser-sync');
 const del = require('del');
 const cleanCSS = require('gulp-clean-css');
+const historyApiFallback = require('connect-history-api-fallback');
 
 gulp.task('default', ['serve']);
 
@@ -31,6 +32,7 @@ gulp.task('release-build', ['set-prod-node-env', 'build']);
 gulp.task('serve', ['build'], () => {
   browserSync.init({
     server: './dist',
+    middleware: [historyApiFallback()],
   });
 
   gulp.watch('./src/**/*.js*', ['js']);
