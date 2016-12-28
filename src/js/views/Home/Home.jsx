@@ -15,8 +15,9 @@ class Home extends React.Component {
     return (
       <section style={styles.background}>
         <Container>
-          <HomeHeader path={routePaths.ABOUT} text={'NICOLAS REICHERT\'S'} isBig />
-          <HomeHeader path={routePaths.PROJECTS} text={'PORTFOLIO'} />
+          <HomeHeader path={routePaths.ABOUT} text="NICOLAS REICHERT'S" isBig color="#ff5f2e" />
+          <br />
+          <HomeHeader path={routePaths.PROJECTS} text="PORTFOLIO" color="#ffca35" />
         </Container>
       </section>
     );
