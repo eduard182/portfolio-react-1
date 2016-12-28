@@ -25,6 +25,9 @@ const styles = {
     [desktop]: {
       fontSize: 40,
     },
+    [phone]: {
+      fontSize: 39,
+    },
     ':hover': {
       transform: 'scale(1.2)',
     },
@@ -34,6 +37,9 @@ const styles = {
     fontSize: 120,
     [desktop]: {
       fontSize: 90,
+    },
+    [phone]: {
+      fontSize: 50,
     },
   },
   animatedText: {
@@ -93,30 +99,15 @@ class HomeHeader extends React.Component {
     });
   }
 
-  renderText() {
-    const { text } = this.props;
-    const words = text.split(' ');
-
-    if (!words.length) {
-      return words;
-    }
-
-    return (
-      <div>
-        {words[0]} <br style={styles.lineBreak} />{words[1]}
-      </div>
-    );
-  }
-
   render() {
-    const { path, isBig, color } = this.props;
+    const { path, isBig, text, color } = this.props;
     return (
       <Link style={styles.baseLink} to={path}>
         <div style={[styles.wrapper, isBig && styles.wrapperBig]}>
-          {this.renderText()}
+          {text}
           <div style={styles.animatedText} ref={(node) => { this.animatedHeader = node; }}>
             <span style={[styles.span, { color }]} ref={(node) => { this.span = node; }}>
-              {this.renderText()}
+              {text}
             </span>
           </div>
         </div>
