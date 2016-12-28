@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import radium from 'radium';
 import NavbarLink from './NavbarLink';
+import { tablet } from '../../../common/layout';
 
 const styles = {
   entry: {
@@ -9,7 +10,7 @@ const styles = {
     height: '100vh',
     position: 'absolute',
     zIndex: 1,
-    '@media (max-width: 768px)': {
+    [tablet]: {
       height: '20vh',
       width: '100vw',
     },
@@ -18,7 +19,7 @@ const styles = {
     width: '100vw',
     height: '100vh',
     zIndex: 100,
-    '@media (max-width: 768px)': {
+    [tablet]: {
       width: '100vw',
       height: '100vh',
     },
@@ -32,7 +33,7 @@ function linkPosition(index, active) {
   return {
     left: `${index * 20}vw`,
     top: 0,
-    '@media (max-width: 768px)': {
+    [tablet]: {
       top: `${index * 20}vh`,
       left: 0,
     },

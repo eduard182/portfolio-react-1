@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import radium from 'radium';
+import { desktop } from '../../../common/layout';
 
 const styles = {
   button: {
@@ -13,11 +14,14 @@ const styles = {
     MozOsxFontSmoothing: 'grayscale',
     left: '50%',
     top: '50%',
-    fontSize: 80,
+    fontSize: 75,
     transform: 'translate(-50%, -50%)',
     backgroundColor: 'transparent',
     border: 0,
     opacity: 1,
+    [desktop]: {
+      fontSize: 55,
+    },
     ':hover': {
       textDecoration: 'underline',
     },

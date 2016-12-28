@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import radium from 'radium';
+import { tablet } from '../../../common/layout';
 
 const styles = {
   hamburger: {
@@ -12,7 +13,7 @@ const styles = {
     left: 25,
     top: 25,
     zIndex: 100,
-    '@media(max-width: 768px)': {
+    [tablet]: {
       left: 'calc(100vw - 70px)',
     },
     ':focus': {
