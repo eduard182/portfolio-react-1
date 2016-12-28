@@ -3,6 +3,7 @@ import radium from 'radium';
 import { findDOMNode } from 'react-dom';
 import { Link } from 'react-router';
 import $ from 'jquery';
+import { desktop } from '../../../common/layout';
 
 const styles = {
   baseLink: {
@@ -15,14 +16,20 @@ const styles = {
   wrapper: {
     fontFamily: 'BigNoodle',
     display: 'block',
-    fontSize: 40,
+    fontSize: 60,
     color: 'white',
+    [desktop]: {
+      fontSize: 40,
+    },
     ':hover': {
       transform: 'scale(1.2)',
     },
   },
   wrapperBig: {
-    fontSize: 90,
+    fontSize: 120,
+    [desktop]: {
+      fontSize: 90,
+    },
   },
   animatedText: {
     position: 'absolute',
@@ -46,10 +53,10 @@ class HomeHeader extends React.Component {
 
   animateHomeHeader() {
     const $header = $(findDOMNode(this.animatedHeader));
-    $header.css('left', '0');
+    $header.css('transform', 'translate(0)');
 
     const $span = $(findDOMNode(this.span));
-    $span.css('left', '0');
+    $span.css('transform', 'translate(0)');
 
     $({ width: 0 }).animate({ width: 100 }, {
       duration: 'slow',
@@ -62,10 +69,10 @@ class HomeHeader extends React.Component {
           duration: 'slow',
           step: (now) => {
             $header.css({
-              left: `${now}px`,
+              transform: `translateX(${now}px)`,
               width: `${width - now}px`,
             });
-            $span.css('left', `${now * -1}px`);
+            $span.css('transform', `translateX(${now * -1}px)`);
           },
           done: () => {
             setTimeout(() => { this.animateHomeHeader(); }, 2000);
