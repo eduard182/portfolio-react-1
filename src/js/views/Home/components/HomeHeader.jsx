@@ -3,7 +3,7 @@ import radium from 'radium';
 import { findDOMNode } from 'react-dom';
 import { Link } from 'react-router';
 import $ from 'jquery';
-import { desktop } from '../../../common/layout';
+import { desktop, phone } from '../../../common/layout';
 
 const styles = {
   baseLink: {
@@ -15,6 +15,10 @@ const styles = {
   },
   wrapper: {
     fontFamily: 'BigNoodle',
+    textRendering: 'optimizeLegibility',
+    textDecoration: 'none',
+    WebkitFontSmoothing: 'antialiased',
+    MozOsxFontSmoothing: 'grayscale',
     display: 'block',
     fontSize: 60,
     color: 'white',
@@ -24,6 +28,7 @@ const styles = {
     ':hover': {
       transform: 'scale(1.2)',
     },
+    marginBottom: 15,
   },
   wrapperBig: {
     fontSize: 120,
@@ -43,6 +48,12 @@ const styles = {
     position: 'absolute',
     whiteSpace: 'nowrap',
     wordBreak: 'keep-all',
+  },
+  lineBreak: {
+    display: 'none',
+    [phone]: {
+      display: 'block',
+    },
   },
 };
 
@@ -82,15 +93,30 @@ class HomeHeader extends React.Component {
     });
   }
 
+  renderText() {
+    const { text } = this.props;
+    const words = text.split(' ');
+
+    if (!words.length) {
+      return words;
+    }
+
+    return (
+      <div>
+        {words[0]} <br style={styles.lineBreak} />{words[1]}
+      </div>
+    );
+  }
+
   render() {
-    const { path, text, isBig, color } = this.props;
+    const { path, isBig, color } = this.props;
     return (
       <Link style={styles.baseLink} to={path}>
         <div style={[styles.wrapper, isBig && styles.wrapperBig]}>
-          {text}
+          {this.renderText()}
           <div style={styles.animatedText} ref={(node) => { this.animatedHeader = node; }}>
             <span style={[styles.span, { color }]} ref={(node) => { this.span = node; }}>
-              {text}
+              {this.renderText()}
             </span>
           </div>
         </div>

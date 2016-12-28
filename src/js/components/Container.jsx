@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import radium from 'radium';
-import { desktop, phone, tablet, largeScreen } from '../common/layout';
+import { desktop, phone, tablet } from '../common/layout';
 
 const styles = {
   container: {
@@ -8,9 +8,7 @@ const styles = {
     left: '50%',
     top: '50%',
     transform: 'translate(-50%, -50%)',
-    [largeScreen]: {
-      width: 1000,
-    },
+    width: 1000,
     [desktop]: {
       width: 768,
     },
