@@ -1,10 +1,11 @@
 import React from 'react';
 import radium from 'radium';
+import Container from '../../components/Container';
+import { HomeHeader, HomeButton } from './components';
+import { routePaths } from '../../constants';
 
 const styles = {
   background: {
-    width: '100%',
-    height: '100%',
     backgroundColor: '#47b8e0',
   },
 };
@@ -12,7 +13,12 @@ const styles = {
 class Home extends React.Component {
   render() {
     return (
-      <div style={styles.background}>HOME</div>
+      <section style={styles.background}>
+        <Container>
+          <HomeHeader path={routePaths.ABOUT} text={'NICOLAS REICHERT\'S'} isBig />
+          <HomeHeader path={routePaths.PROJECTS} text={'PORTFOLIO'} />
+        </Container>
+      </section>
     );
   }
 }
