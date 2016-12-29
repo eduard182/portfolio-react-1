@@ -1,12 +1,19 @@
 import React, { PropTypes } from 'react';
 import radium from 'radium';
-import Container from '../../components/Container';
+import { Container } from '../../components';
 import { HomeHeader, HomeButton } from './components';
 import { headersData, buttonsData } from './model';
 
 const styles = {
   background: {
     backgroundColor: '#47b8e0',
+  },
+  div: {
+    display: 'inline-block',
+    position: 'relative',
+    left: '50%',
+    transform: 'translate(-50%)',
+    marginBottom: 15,
   },
 };
 
@@ -23,12 +30,16 @@ class Home extends React.Component {
     return (
       <section style={styles.background}>
         <Container>
-          {headers.map((header, index) => (
-            <HomeHeader {...header} key={index} />
-          ))}
-          {buttons.map(button => (
-            <HomeButton {...button} key={button.index} />
-          ))}
+          <div style={styles.div}>
+            {headers.map((header, index) => (
+              <HomeHeader {...header} key={index} />
+            ))}
+          </div>
+          <div style={styles.div}>
+            {buttons.map(button => (
+              <HomeButton {...button} key={button.index} />
+            ))}
+          </div>
         </Container>
       </section>
     );
