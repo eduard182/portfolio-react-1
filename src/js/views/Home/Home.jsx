@@ -1,13 +1,10 @@
 import React, { PropTypes } from 'react';
 import radium from 'radium';
-import { Container } from '../../components';
+import { Container, AppView } from '../../components';
 import { HomeHeader, HomeButton } from './components';
 import { headersData, buttonsData } from './model';
 
 const styles = {
-  background: {
-    backgroundColor: '#47b8e0',
-  },
   div: {
     display: 'inline-block',
     position: 'relative',
@@ -17,7 +14,7 @@ const styles = {
   },
 };
 
-class Home extends React.Component {
+class Home extends AppView {
   static get defaultProps() {
     return {
       headers: headersData,
@@ -27,21 +24,19 @@ class Home extends React.Component {
 
   render() {
     const { headers, buttons } = this.props;
-    return (
-      <section style={styles.background}>
-        <Container>
-          <div style={styles.div}>
-            {headers.map((header, index) => (
-              <HomeHeader {...header} key={index} />
-            ))}
-          </div>
-          <div style={styles.div}>
-            {buttons.map(button => (
-              <HomeButton {...button} key={button.index} />
-            ))}
-          </div>
-        </Container>
-      </section>
+    return super.render(
+      <Container>
+        <div style={styles.div}>
+          {headers.map((header, index) => (
+            <HomeHeader {...header} key={index} />
+          ))}
+        </div>
+        <div style={styles.div}>
+          {buttons.map(button => (
+            <HomeButton {...button} key={button.index} />
+          ))}
+        </div>
+      </Container>
     );
   }
 }

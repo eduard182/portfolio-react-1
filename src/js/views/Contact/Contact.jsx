@@ -1,18 +1,13 @@
 import React from 'react';
 import radium from 'radium';
+import { Container, AppView } from '../../components';
 
-const styles = {
-  background: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: '#8e55a6',
-  },
-};
-
-class Contact extends React.Component {
+class Contact extends AppView {
   render() {
-    return (
-      <div style={styles.background}>CONTACT</div>
+    return super.render(
+      <Container>
+        <div>CONTACT</div>
+      </Container>
     );
   }
 }
