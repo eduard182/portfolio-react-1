@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import radium from 'radium';
 import Container from '../../components/Container';
 import { HomeHeader, HomeButton } from './components';
-import { routePaths } from '../../constants';
+import { headersData, buttonsData } from './model';
 
 const styles = {
   background: {
@@ -11,17 +11,46 @@ const styles = {
 };
 
 class Home extends React.Component {
+  static get defaultProps() {
+    return {
+      headers: headersData,
+      buttons: buttonsData,
+    };
+  }
+
   render() {
+    const { headers, buttons } = this.props;
     return (
       <section style={styles.background}>
         <Container>
-          <HomeHeader path={routePaths.ABOUT} text="NICOLAS REICHERT'S" isBig color="#ff5f2e" />
-          <br />
-          <HomeHeader path={routePaths.PROJECTS} text="PORTFOLIO" color="#ffca35" />
+          {headers.map((header, index) => (
+            <HomeHeader {...header} key={index} />
+          ))}
+          {buttons.map(button => (
+            <HomeButton {...button} key={button.index} />
+          ))}
         </Container>
       </section>
     );
   }
 }
+
+Home.propTypes = {
+  headers: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      path: PropTypes.string.isRequired,
+      color: PropTypes.string.isRequired,
+      isBig: PropTypes.bool,
+    }),
+  ),
+  buttons: PropTypes.arrayOf(
+    PropTypes.shape({
+      index: PropTypes.number.isRequired,
+      textFront: PropTypes.string.isRequired,
+      textBack: PropTypes.string.isRequired,
+    }),
+  ),
+};
 
 export default radium(Home);
