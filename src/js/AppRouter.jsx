@@ -7,6 +7,7 @@ import { Contact } from './views/Contact';
 import { Home } from './views/Home';
 import { Projects } from './views/Projects';
 import { Skills } from './views/Skills';
+import { NotFound } from './views/NotFound';
 
 const AppRouter = () => (
   <Router history={browserHistory}>
@@ -16,6 +17,7 @@ const AppRouter = () => (
       <Route path={routePaths.PROJECTS} component={Projects} />
       <Route path={routePaths.ABOUT} component={About} />
       <Route path={routePaths.CONTACT} component={Contact} />
+      <Route path="*" component={NotFound} />
     </Route>
   </Router>
 );
