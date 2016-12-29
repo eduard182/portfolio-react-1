@@ -16,8 +16,6 @@ const styles = {
     top: '50%',
     fontSize: 75,
     transform: 'translate(-50%, -50%)',
-    backgroundColor: 'transparent',
-    border: 0,
     opacity: 1,
     [desktop]: {
       fontSize: 55,
