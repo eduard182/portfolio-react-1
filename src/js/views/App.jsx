@@ -3,7 +3,7 @@ import { Navbar } from './Navbar';
 
 function App({ children, location }) {
   return (
-    <div style={{ backgroundColor: 'black', width: '100vw', height: '100vh' }}>
+    <div style={{ width: '100vw', height: '100vh' }}>
       <Navbar path={location.pathname} />
       {children}
     </div>
