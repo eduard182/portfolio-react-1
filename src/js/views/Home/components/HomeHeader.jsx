@@ -12,6 +12,8 @@ const styles = {
     left: '50%',
     transform: 'translate(-50%)',
     display: 'inline-block',
+    float: 'left',
+    clear: 'left',
   },
   wrapper: {
     fontFamily: 'BigNoodle',
@@ -22,6 +24,8 @@ const styles = {
     display: 'block',
     fontSize: 60,
     color: 'white',
+    whiteSpace: 'nowrap',
+    wordBreak: 'keep-all',
     [desktop]: {
       fontSize: 40,
     },
@@ -47,19 +51,11 @@ const styles = {
     overflow: 'hidden',
     top: 0,
     left: 0,
-    width: '100%',
+    width: 0,
     height: '100%',
   },
   span: {
     position: 'absolute',
-    whiteSpace: 'nowrap',
-    wordBreak: 'keep-all',
-  },
-  lineBreak: {
-    display: 'none',
-    [phone]: {
-      display: 'block',
-    },
   },
 };
 
@@ -68,35 +64,46 @@ class HomeHeader extends React.Component {
     this.animateHomeHeader();
   }
 
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   animateHomeHeader() {
     const $header = $(findDOMNode(this.animatedHeader));
-    $header.css('transform', 'translate(0)');
-
     const $span = $(findDOMNode(this.span));
-    $span.css('transform', 'translate(0)');
 
-    $({ width: 0 }).animate({ width: 100 }, {
-      duration: 'slow',
-      step: (now) => {
-        $header.css('width', `${now}%`);
-      },
-      done: () => {
-        const width = $header.width();
-        $({ width: 0 }).animate({ width }, {
-          duration: 'slow',
-          step: (now) => {
-            $header.css({
-              transform: `translateX(${now}px)`,
-              width: `${width - now}px`,
-            });
-            $span.css('transform', `translateX(${now * -1}px)`);
-          },
-          done: () => {
-            setTimeout(() => { this.animateHomeHeader(); }, 2000);
-          },
-        });
-      },
-    });
+    let shrink = () => {};
+    // Animation of fonts turning colored.
+    const expand = () => {
+      // reset values for animating.
+      $header.css('transform', 'translate(0)');
+      $span.css('transform', 'translate(0)');
+
+      $({ width: 0 }).animate({ width: 100 }, {
+        duration: 'slow',
+        step: (now) => {
+          $header.css('width', `${now}%`);
+        },
+        done: shrink,
+      });
+    };
+
+    // Animation of fonts turning white again.
+    shrink = () => {
+      const width = $header.width();
+      $({ width: 0 }).animate({ width }, {
+        duration: 'slow',
+        step: (now) => {
+          $header.css({
+            transform: `translateX(${now}px)`,
+            width: `${width - now}px`,
+          });
+          $span.css('transform', `translateX(${now * -1}px)`);
+        },
+      });
+    };
+
+    this.interval = setInterval(expand, 3000);
   }
 
   render() {
