@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
 import radium from 'radium';
-import { findDOMNode } from 'react-dom';
 import { Link } from 'react-router';
-import $ from 'jquery';
+import TWEEN, { Tween } from 'tween.js';
 import { desktop, phone } from '../../../common/layout';
 
 const styles = {
@@ -60,50 +59,55 @@ const styles = {
 };
 
 class HomeHeader extends React.Component {
+  constructor(props) {
+    super(props);
+    this.animate = this.animate.bind(this);
+    this.expand = this.expand.bind(this);
+    this.shrink = this.shrink.bind(this);
+  }
+
   componentDidMount() {
-    this.animateHomeHeader();
+    this.interval = setInterval(this.expand, 3000);
+    this.animate();
   }
 
   componentWillUnmount() {
     clearInterval(this.interval);
+    cancelAnimationFrame(this.animationFrame);
   }
 
-  animateHomeHeader() {
-    const $header = $(findDOMNode(this.animatedHeader));
-    const $span = $(findDOMNode(this.span));
+  expand() {
+    const { animatedHeader, span } = this;
+    // reset values for animating.
+    animatedHeader.style.transform = span.style.transform = 'translateX(0)';
+    animatedHeader.style.width = 0;
 
-    let shrink = () => {};
-    // Animation of fonts turning colored.
-    const expand = () => {
-      // reset values for animating.
-      $header.css('transform', 'translate(0)');
-      $span.css('transform', 'translate(0)');
+    new Tween({ width: 0 })
+      .to({ width: 100 }, 500)
+      .onUpdate(function () {
+        animatedHeader.style.width = `${this.width}%`;
+      })
+      .start();
 
-      $({ width: 0 }).animate({ width: 100 }, {
-        duration: 'slow',
-        step: (now) => {
-          $header.css('width', `${now}%`);
-        },
-        done: shrink,
-      });
-    };
+    setTimeout(this.shrink, 500);
+  }
 
-    // Animation of fonts turning white again.
-    shrink = () => {
-      const width = $header.width();
-      $({ width: 0 }).animate({ width }, {
-        duration: 'slow',
-        step: (now) => {
-          $header.css({
-            transform: `translateX(${now}px)`,
-            width: `${width - now}px`,
-          });
-          $span.css('transform', `translateX(${now * -1}px)`);
-        },
-      });
-    };
+  shrink() {
+    const { animatedHeader, span } = this;
+    const width = animatedHeader.getBoundingClientRect().width;
+    new Tween({ width })
+      .to({ width: 0 }, 500)
+      .onUpdate(function () {
+        animatedHeader.style.transform = `translateX(${width - this.width}px)`;
+        animatedHeader.style.width = this.width;
+        span.style.transform = `translateX(-${width - this.width}px)`;
+      })
+      .start();
+  }
 
-    this.interval = setInterval(expand, 3000);
+  animate(time) {
+    this.animationFrame = requestAnimationFrame(this.animate);
+    TWEEN.update(time);
   }
 
   render() {
