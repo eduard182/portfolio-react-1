@@ -21,17 +21,17 @@ const config = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
   },
-  plugins: [],
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      },
+    }),
+  ],
 };
 
 if (process.env.NODE_ENV === 'production') {
   config.plugins.push(
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      },
-      PRODUCTION: JSON.stringify(true),
-    }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
@@ -39,12 +39,6 @@ if (process.env.NODE_ENV === 'production') {
       sourceMap: false,
       comments: false,
       mangle: true,
-    })
-  );
-} else {
-  config.plugins.push(
-    new webpack.DefinePlugin({
-      PRODUCTION: JSON.stringify(false),
     })
   );
 }

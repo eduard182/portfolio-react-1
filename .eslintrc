@@ -9,7 +9,6 @@
     "describe": false,
     "it": false,
     "require": false,
-    "PRODUCTION": false,
     "requestAnimationFrame": false,
     "cancelAnimationFrame": false
   },
