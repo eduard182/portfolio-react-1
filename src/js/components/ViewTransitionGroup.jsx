@@ -12,9 +12,9 @@ const styles = {
 };
 
 const ViewTransitionGroup = ({ children, active }) => (
-  <section style={[styles.container, active && styles.containerActive]}>
+  <div style={[styles.container, active && styles.containerActive]}>
     {children}
-  </section>
+  </div>
 );
 
 ViewTransitionGroup.propTypes = {

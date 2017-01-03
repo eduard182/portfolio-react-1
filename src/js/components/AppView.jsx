@@ -11,9 +11,7 @@ class AppView extends React.Component {
   }
 
   setActiveAndCallbackAfter(active, delayActive, callback, delayCallback) {
-    setTimeout(() => {
-      callback();
-    }, delayCallback);
+    setTimeout(callback, delayCallback);
 
     setTimeout(() => {
       this.setState({ active });

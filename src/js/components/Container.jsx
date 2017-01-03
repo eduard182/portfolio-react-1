@@ -21,14 +21,15 @@ const styles = {
   },
 };
 
-const Container = ({ children }) => (
-  <div style={styles.container}>
+const Container = ({ children, style }) => (
+  <div style={[styles.container, style]}>
     {children}
   </div>
 );
 
 Container.propTypes = {
   children: PropTypes.node,
+  style: PropTypes.shape({}),
 };
 
 export default radium(Container);

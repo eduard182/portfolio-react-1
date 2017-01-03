@@ -16,6 +16,9 @@ const images = {
   // Skills page
 
   // About page
+  aboutBoard: createImageUrl('about/board.png'),
+  aboutPhoto: createImageUrl('about/photo.png'),
+  aboutPhotoBackground: createImageUrl('about/photo-background.png'),
 
   // Projects page
 
